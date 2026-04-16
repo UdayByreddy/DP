@@ -1,0 +1,20 @@
+class Solution {
+    public int frogJump(int[] heights, int k) {
+        int n = heights.length;
+        int [] dp = new int[n];
+        Arrays.fill(dp,-1);
+        return getHeight(heights,n-1,k,dp);
+    }
+    public int getHeight(int[] heights,int index,int k,int[] dp){
+        if(index==0) return 0;
+        if(dp[index]!=-1) return dp[index];
+        int minSteps = Integer.MAX_VALUE;
+        for(int j=1;j<=k;j++){
+            if(index-j>=0){
+               int steps = getHeight(heights,index-j,k,dp)+ Math.abs(heights[index]-heights[index-j]);
+                minSteps = Math.min(minSteps,steps);
+            }
+        }
+        return dp[index]=minSteps;
+    }
+}
