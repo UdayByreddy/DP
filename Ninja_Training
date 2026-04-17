@@ -1,0 +1,29 @@
+class Solution {
+    public int ninjaTraining(int[][] matrix) {
+        int n = matrix.length;
+        int[][] dp = new int[n][4];
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return dp(n-1,3,matrix,dp);
+    }
+    public int dp(int day,int last,int[][] matrix,int[][] dp){
+        if(dp[day][last]!=-1) return dp[day][last];
+        if(day==0){
+            int max=0;
+            for(int i=0;i<3;i++){
+                if(i!=last)
+                max = Math.max(max,matrix[0][i]);
+            }
+            return dp[day][last]=max;
+        }
+        int maxi=0;
+        for(int i=0;i<3;i++){
+            if(i!=last){
+               int act= matrix[day][i]+dp(day-1,i,matrix,dp);
+                maxi = Math.max(act,maxi);
+            }
+        }
+        return dp[day][last]=maxi;
+    }
+}
