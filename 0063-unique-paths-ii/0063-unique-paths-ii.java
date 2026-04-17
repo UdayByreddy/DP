@@ -8,12 +8,12 @@ class Solution {
         }
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(i==0&&j==0){
-                    dp[i][j]=1;
+             if(obstacleGrid[i][j]==1){
+                    dp[i][j]=0;
                     continue;
                 }
-                if(obstacleGrid[i][j]==1){
-                    dp[i][j]=0;
+                if(i==0&&j==0){
+                    dp[i][j]=1;
                     continue;
                 }
                 int up=0;
